@@ -223,7 +223,14 @@ class DB_Mysql():
         self.execute(query + '(account_id, username, password) VALUES (%s, %s, %s);', (account_id, username, password))
         self.dbh.commit()
         return str(username)
-        
+
+    def insert_account(self, username):
+        username = username.split(".", 1)[0]
+        log.debug("Adding new account %s", username)
+        query = "INSERT INTO accounts"
+        self.execute(query + '(username) VALUES (%s);', (username))
+        self.dbh.commit()
+        return str(username)
 
     def delete_user(self, id_or_username):
         if id_or_username.isdigit() and id_or_username == '0':
