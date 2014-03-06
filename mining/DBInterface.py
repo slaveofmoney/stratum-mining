@@ -162,7 +162,7 @@ class DBInterface():
         if username == "":
             log.info("Rejected worker for blank username")
             return False
-        allowed_chars = Set('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-.')
+        allowed_chars = Set('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.')
         if Set(username).issubset(allowed_chars) != True:
             log.info("Username contains bad arguments")
             return False
@@ -182,6 +182,12 @@ class DBInterface():
             return True
         elif settings.USERS_AUTOADD == True:
             if self.dbi.get_uid(username) != False:
+                uid = self.dbi.get_uid(username)
+                self.dbi.insert_worker(uid, username, password)
+                self.cache.set(username, password)
+                return True
+            elif
+                self.dbi.insert_account(username)
                 uid = self.dbi.get_uid(username)
                 self.dbi.insert_worker(uid, username, password)
                 self.cache.set(username, password)
