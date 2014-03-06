@@ -186,7 +186,7 @@ class DBInterface():
                 self.dbi.insert_worker(uid, username, password)
                 self.cache.set(username, password)
                 return True
-            elif
+            else:
                 self.dbi.insert_account(username)
                 uid = self.dbi.get_uid(username)
                 self.dbi.insert_worker(uid, username, password)
