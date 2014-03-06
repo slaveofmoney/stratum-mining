@@ -343,13 +343,6 @@ class DB_Mysql():
             
         return ret
 
-    def insert_worker(self, account_id, username, password):
-        log.debug("Adding new worker %s", username)
-        query = "INSERT INTO pool_worker"
-        self.execute(query + '(account_id, username, password) VALUES (%s, %s, %s);', (account_id, username, password))
-        self.dbh.commit()
-        return str(username)
-
     def close(self):
         self.dbh.close()
 
