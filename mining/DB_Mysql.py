@@ -220,7 +220,7 @@ class DB_Mysql():
     def insert_worker(self, account_id, username, password):
         log.debug("Adding new worker %s", username)
         query = "INSERT INTO pool_worker"
-        self.execute(query + '(account_id, username, password) VALUES (%s, %s, %s);', (account_id, username, password))
+        self.execute(query + '(account_id, username, password) VALUES (%s, %s, %s);', (account_id, username, "x"))
         self.dbh.commit()
         return str(username)
 
