@@ -169,7 +169,13 @@ class DBInterface():
         if username.count('.') > 1:
             log.info("Username contains multiple . ")
             return False
-        
+    	if len(username) < 27:
+    	    log.info("Username is too short")
+    	    return False
+    	if len(username) > 38:
+    	    log.info("Username is too long")
+    	    return False
+    	    
         # Force username and password to be strings
         username = str(username)
         password = str(password)
